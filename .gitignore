@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.hd
+*.bin
+*.zip
+*.tar
+*.tar.gz
+*.bz2
+*.pdf
+*.xml
+*.private.*
+*.hd.json
+.DS_Store
+dist/
+build/
+.venv/
+artifacts/

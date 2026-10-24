@@ -1,0 +1,48 @@
+[
+  {
+    "firmware": "V4.00.04.06",
+    "ui": "V5.08.20.03",
+    "hardware_tested": true,
+    "source_hd_bytes": 99090700,
+    "source_hd_sha256": "24baf64b6cb39c34eb4e97da3f910ef9ce5ac8882ef8f3a2aff9b8bfc5d14b05",
+    "output_hd_sha256": "be79af6cf998e8c260ed14c2611cca128db97a6d535e6b00acbe251c75a5a09b",
+    "source_gui_sha256": "099d1330e6bd461ccdb0875ac59a334642cc5006be66b9392b4585c66af47873",
+    "patched_gui_sha256": "513abc9d6da9dcd2ad10c6bc8a7007d0479a5bea12937b4c54aab239b7895a58",
+    "official_zip_url": "https://ftp.hp.com/pub/softlib/software13/printers/SS/SL-C1860FW/SL-C1860_V4.00.04.06.zip",
+    "instruction_patches": [
+      {
+        "file_offset": "0x5cfdc",
+        "before": "b0309fe5",
+        "after": "050000ea"
+      },
+      {
+        "file_offset": "0x5d51c",
+        "before": "0010a0e3",
+        "after": "0110a0e3"
+      }
+    ]
+  },
+  {
+    "firmware": "V4.00.02.50",
+    "ui": "V5.08.51.05",
+    "hardware_tested": false,
+    "source_hd_bytes": 103285004,
+    "source_hd_sha256": "9ef315565b2d16b69319679f958b988fdf272c7a3ba99562f57062176f967849",
+    "output_hd_sha256": "111486f2aef5bc7c58bdca50bda49bf187c7adc936ed8b5546b28552fff585c1",
+    "source_gui_sha256": "65c91209f6792d4daf3a0495d1d4e2e161f05c39ae922fc8d3cf1ade4ca82998",
+    "patched_gui_sha256": "3292105b448d703b0f7673b24577873e7b35e8c8b548fd4f56e01ceea80d2358",
+    "official_zip_url": "https://ftp.hp.com/pub/softlib/software13/printers/SS/SL-C1860FW/SL1860FW_V4.00.02.50.zip",
+    "instruction_patches": [
+      {
+        "file_offset": "0x5cf78",
+        "before": "b0309fe5",
+        "after": "050000ea"
+      },
+      {
+        "file_offset": "0x5d4b8",
+        "before": "0010a0e3",
+        "after": "0110a0e3"
+      }
+    ]
+  }
+]

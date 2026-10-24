@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+  <title id="title">Schema: Firmwareaufkleber hinter der RAM-Serviceklappe</title>
+  <desc id="desc">RAM-Teilekennung oben; separater Hauptplatinen-Aufkleber mit SL-C1860FW/XEC und V4.00.04.03 darunter. Keine echte Seriennummer oder MAC-Adresse.</desc>
+  <rect width="900" height="420" fill="#f5f5f2"/>
+  <text x="28" y="36" font-family="sans-serif" font-size="21" fill="#202522">RAM-Serviceöffnung – Schema, keine Pinbelegung</text>
+  <rect x="28" y="62" width="580" height="326" rx="12" fill="#214d3a"/>
+  <rect x="75" y="92" width="480" height="110" rx="5" fill="#38644c" stroke="#9cb6a6" stroke-width="2"/>
+  <rect x="185" y="119" width="248" height="55" fill="#f1eee1"/>
+  <text x="203" y="143" font-family="monospace" font-size="18">JC92-02472A</text>
+  <text x="203" y="164" font-family="sans-serif" font-size="14">RAM-Teilekennung ≠ Firmware</text>
+  <rect x="105" y="237" width="405" height="113" rx="7" fill="white"/>
+  <text x="127" y="264" font-family="monospace" font-size="20">SL-C1860FW/XEC</text>
+  <rect x="117" y="275" width="290" height="34" rx="3" fill="#fff0a6"/>
+  <text x="127" y="299" font-family="monospace" font-size="23" font-weight="bold">V4.00.04.03</text>
+  <text x="127" y="332" font-family="sans-serif" font-size="15" fill="#686d68">Weitere Barcodes / Identitätsdaten</text>
+  <path d="M 420,291 L 639,291" stroke="#26352c" stroke-width="3"/>
+  <text x="650" y="268" font-family="sans-serif" font-size="17" fill="#202522">Gesucht: V4.00.xx.xx</text>
+  <text x="650" y="295" font-family="sans-serif" font-size="16" fill="#202522">Beispiel vom Testgerät:</text>
+  <text x="650" y="320" font-family="sans-serif" font-size="16" fill="#202522">neuer Firmwarezweig</text>
+  <text x="650" y="352" font-family="sans-serif" font-size="14" fill="#686d68">Mit UI-Version und</text>
+  <text x="650" y="372" font-family="sans-serif" font-size="14" fill="#686d68">Tauschhistorie abgleichen.</text>
+</svg>

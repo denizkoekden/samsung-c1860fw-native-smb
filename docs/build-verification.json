@@ -1,0 +1,20 @@
+{
+  "patcher_version": "1.0.0",
+  "full_input_checks": [
+    {
+      "firmware": "4.00.04.06",
+      "output_sha256": "be79af6cf998e8c260ed14c2611cca128db97a6d535e6b00acbe251c75a5a09b",
+      "matches_reviewed_output": true,
+      "hardware_tested": true
+    },
+    {
+      "firmware": "4.00.02.50",
+      "output_sha256": "111486f2aef5bc7c58bdca50bda49bf187c7adc936ed8b5546b28552fff585c1",
+      "matches_reviewed_output": true,
+      "hardware_tested": false
+    }
+  ],
+  "unit_tests": 18,
+  "hardware_tests_in_this_release_build": 0,
+  "note": "Only .04.06 has the previously documented physical printer test; .02.50 remains untested on hardware."
+}
