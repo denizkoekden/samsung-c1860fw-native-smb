@@ -35,6 +35,12 @@ class ConfigurationTests(unittest.TestCase):
             with self.subTest(server=server, share=share), self.assertRaises(c.SetupError):
                 c.guest_parameters(2, "Scans", server, share)
 
+    def test_display_name_can_be_edited_in_stock_syncthru(self):
+        with self.assertRaises(c.SetupError):
+            c.guest_parameters(2, "Scanner_raw", "NAS", "Scanner_raw")
+        value = c.guest_parameters(2, "Scanner raw", "NAS", "Scanner_raw")
+        self.assertEqual(value["smb_sharedFolder"], "Scanner_raw")
+
     def test_unknown_used_number_format_fails_closed(self):
         client = c.Client("192.0.2.10", "admin", "not a real password")
         with patch.object(client, "post", return_value={"usedSpeedNo": "1,2"}):

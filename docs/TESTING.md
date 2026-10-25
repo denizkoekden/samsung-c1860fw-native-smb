@@ -46,6 +46,18 @@ proof of device acceptance or recovery.
 
 ## Automated tests
 
+The current development tree also includes a loopback-only view of the original
+SyncThru address-book dialogs. On the same `.04.06` printer, login, opening an
+existing SMB contact, and saving a display-name change were verified through the
+stock Samsung UI. Independent readback found no changes to its SMB/FTP server
+parameters. Add/delete, named NAS-password authentication, and `.02.50` browser
+behavior remain untested. The direct printer URL still returns the original
+capability flag. See [the address-book guide](ADRESSBUCH-ANSICHT.md).
+
+The 24 current tests include loopback HTTP checks for the new helper; they do
+not contact a printer or external host. Local socket binding must be permitted
+to run those tests.
+
 Run from the repo root:
 
 ```sh

@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+- Experimental loopback-only view of the printer's original SMB/FTP address-book
+  dialogs, with writes disabled by default and explicit address-book-only opt-in.
+- Verified opening and editing one existing guest SMB destination on `.04.06`;
+  independent readback found only its intended display-name change. Named NAS
+  authentication, add/delete, and `.02.50` browser behavior remain untested.
+- Reject guest-helper display names that the stock editor cannot accept,
+  including underscores; share/path names remain unaffected.
+- Research notes distinguish PDF encryption, copy stamps, document boxes,
+  stored print modes and printer-hosted shared folders from proven unlocks.
+
 ## 1.0.0 — 2026-10-25
 
 - Offline exact-hash patcher for C1860FW V4.00.04.06 / UI V5.08.20.03.

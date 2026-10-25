@@ -171,6 +171,10 @@ def guest_parameters(slot, name, server, share):
         raise SetupError("Dieser Helfer verwendet nur Kurzwahl 1 bis 50.")
     if not name or len(name) > 30 or not server or len(server) > 128:
         raise SetupError("Name oder NAS-Adresse fehlt oder ist zu lang.")
+    if not re.fullmatch(r"[A-Za-z0-9 +.,'/*#&@-]{1,30}", name):
+        raise SetupError("Anzeigename: Buchstaben A-Z, Ziffern oder Leerzeichen verwenden. "
+                         "Der originale SyncThru-Editor akzeptiert z. B. keinen Unterstrich. "
+                         "Der Freigabename darf weiterhin Unterstriche enthalten.")
     if "://" in server or "/" in server or "\\" in server:
         raise SetupError("NAS-IP/Hostname eingeben, keine smb://-URL und keinen Pfad.")
     if not share or len(share) > 128 or share in (".", "..") or any(c in share for c in "/\\"):

@@ -9,7 +9,7 @@ Backendpfad besitzt.
 | Funktion | Beleg | Status dieses Projekts |
 | --- | --- | --- |
 | SMB-Scan zu externem NAS/Server | Capability- und Modellsperre im Display; Scanengine funktioniert | **Freigeschaltet, Display-zu-NAS-Scan getestet** |
-| FTP-Scan | Im selben Modellblock ausgeblendet | Nicht gepatcht, kein Ende-zu-Ende-Test |
+| FTP-Scan | Im selben Modellblock ausgeblendet | Zusätzliche zwei Instruktionen je Hardwarezweig lokal als Experiment vorbereitet; noch nicht installiert oder Ende zu Ende getestet; nicht Bestandteil des veröffentlichten SMB-Patchprofils |
 | „Shared Folder“ | Im selben Modellblock gesperrt; Hersteller beschreibt lokalen Gerätespeicher/Massenspeicher | Nicht gepatcht; **kein Synonym für ein externes SMB-Ziel** |
 | PDF-Verschlüsselung beim Scannen | Herstellerübersicht ordnet sie bestimmten Varianten zu | Backend und Freischaltbarkeit ungeprüft |
 | Stempel/Stamp bei Kopierfunktionen | Herstellerübersicht nennt andere Varianten | Freischaltbarkeit ungeprüft |
@@ -60,11 +60,94 @@ Für die vollständige **originale** Webpflege müsste die separate
 SyncThru-Präsentationssperre gezielt aufgehoben und der originale
 Hinzufügen-/Bearbeiten-/Löschen-/Passwortablauf getestet werden. Alternativ wäre
 ein eigener vollständiger Editor über die vorhandenen Handler möglich.
-Beides ist noch keine fertige Erweiterung dieses Releases. Ein zusätzlicher
-Mainboard-/Web-Firmwarepatch wäre eine neue, nicht vom bisherigen Hardwaretest
-abgedeckte Änderung.
+Release `v1.0.0` enthält diese Erweiterung noch nicht. Im aktuellen
+Entwicklungsstand gibt es die [lokale originale Adressbuchansicht](ADRESSBUCH-ANSICHT.md):
+die SMB-/FTP-Dialoge wurden am `.04.06`-Gerät geöffnet und ein vorhandener
+Gast-SMB-Kontakt erfolgreich gespeichert. Rücklesen bestätigte nur den beabsichtigten
+Anzeigenamenwechsel; alle Serverparameter blieben identisch. Hinzufügen/Löschen und
+NAS-Passwortanmeldung sind über diese Ansicht noch ungetestet.
+
+Diese lokale Ansicht setzt ausschließlich das Anzeigefeld in der Browserantwort.
+Für eine **dauerhafte** Änderung der direkten SyncThru-Druckeradresse müsste das
+Netzwerkmodul auf der Hauptplatine bearbeitet werden: dessen Variablentabelle
+enthält für `GXI_S2SERVER_SUPPORT` einen Getter, aber keinen Setter. Für dieses
+Hauptplatinenmodul ist noch kein geprüfter Neuverpackungs-/Installationsweg
+implementiert. Das ist eine andere Änderung als der getestete Displaypatch.
 
 Die originale Websoftware nutzt eigene Passwort-Übertragungsformate
 (`MakeSWSData`). Ein geratenes Klartext-Passwortfeld ist kein geprüfter Ersatz.
 Vorhandene Handler, sichtbare Support-Anzeigen und erfolgreiche Gastanmeldung
 belegen nicht automatisch sämtliche NAS-Authentifizierungsarten.
+
+## Was die weiteren Funktionen tatsächlich machen
+
+### PDF-Verschlüsselung
+
+Der Scanner erzeugt ein verschlüsseltes PDF. Zum Öffnen benötigt der Empfänger
+ein Passwort. Zusätzlich können die Samsung-PDF-Optionen ein Eigentümerpasswort
+und Berechtigungen für Drucken, Ändern und Textextraktion vorsehen. Die allgemeine
+Hersteller-Sicherheitsbeschreibung nennt RC4 und AES; das beweist für sich allein
+keine Implementierung auf jeder Gerätevariante.
+
+Quelle: [Samsung-Handbuch, Scan](https://samsungsetup.com/ts/manual/Samsung%20C1860%20Series/English/manual/CIHDJJGF.htm),
+[Samsung-Sicherheitsbeschreibung, Abschnitt 8.1.3](https://image-us.samsung.com/SamsungUS/b2b/resource/2013/06/19/MultifunctionPrinterSecurity.pdf).
+
+**Befund an unserem Gerät:** Die bereits lokal gesicherte interne
+Scanjobfactory meldet `secureCap: "sfTrue"` sowie AES-128, RC4-128 und RC4-40
+als mögliche Werte. Der passende Displaycode enthält Passwortfelder und
+überträgt `secure`, `secureEncryption`, `secureOwnerPassword` und
+`secureUserPassword` an die Scanner-API. Das ist ein konkreter Kandidat für einen
+weiteren Test. Ein erfolgreich verschlüsseltes PDF und der Zugang zu den nötigen
+Displayoptionen wurden noch nicht nachgewiesen. Es wurde kein PDF-Patch installiert.
+
+### Dokumentbox
+
+Die Dokumentbox ist die Bedienoberfläche für im Drucker aufbewahrte Dokumente:
+**Stored Print** ruft gespeicherte Druckdaten ab, **Secured Print** verlangt
+dafür ein Passwort. Sie ist nicht schon dadurch eine neue externe NAS-Verbindung.
+Für Aufbewahrung und Wiederabruf muss ein tatsächlicher Speicherpfad vorhanden
+sein; das bloße Einblenden einer Taste erzeugt ihn nicht.
+
+Quelle: [Samsung-Handbuch, Document box](https://printersetup.ext.hp.com/ts/manual/Samsung%20C145x%20Series/English/manual/machine_status_2.htm).
+
+### Gespeicherte Druckaufträge
+
+Dies sind die Aufträge innerhalb der Dokumentbox beziehungsweise Jobverwaltung.
+Der Druckertreiber kann beispielsweise **Proof** (erst eine Kontrollkopie),
+**Confidential** (Freigabe am Gerät mit Passwort), **Store** (nur speichern) oder
+**Store and Print** (drucken und für später behalten) anbieten. Welche davon
+funktionieren, hängt von Gerät, Treiber und Speicher ab. Bei einigen Samsung-Modellen
+ermöglicht eine RAM-Disk nur Normal/Proof/Confidential; daraus folgt keine
+entsprechende Zusage für den C1860FW. Eine RAM-Disk verliert ihren Inhalt beim
+Ausschalten; mehr RAM ist kein Ersatz für dauerhaften Massenspeicher.
+
+Quellen: [Samsung-Treiberhandbuch, Print Mode](https://h10032.www1.hp.com/ctg/Manual/c05791007.pdf),
+[Samsung M403x, ausdrücklich modellabhängige RAM-Disk-Grenzen](https://printersetup.ext.hp.com/ts/manual/Samsung%20M403x%20Series/English/manual/CACHBFHB.htm).
+
+### Stempel
+
+Gemeint sind auf **Kopien** aufgedruckte Angaben wie Datum/Uhrzeit, Gerätename,
+IP-Adresse, Benutzerkennung oder Seitennummer mit Position/Deckkraft. Das ist
+eine andere Funktion als die Verschlüsselung eines Scan-PDFs.
+
+Quelle: [Samsung-Handbuch, System setup](https://printersetup.ext.hp.com/ts/manual/Samsung%20C145x%20Series/English/manual/machine_status_2.htm).
+Im Displaycode ist die Auswahl vorhandener Stempel-Fähigkeiten implementiert;
+ein erfolgreicher Stempelauftrag am C1860FW wurde nicht getestet.
+
+### Scan in „Shared Folder“
+
+Samsung beschreibt hier einen vom **Drucker bereitgestellten Ordner** für Scans
+und Dokumente. Der Computer greift auf diesen Gerätespeicher zu. Das ist ein
+anderer Ablageweg als **SMB Scan** zu einer Freigabe auf einem externen NAS.
+Das Herstellerhandbuch bindet Shared Folder an Modelle mit Massenspeicher.
+
+Quelle: [Samsung-Handbuch, Using shared folder features](https://www.manualslib.com/manual/416466/Samsung-Clx-6260nd.html?page=302).
+
+**Speicherbefund:** Das getestete Gerät meldet im echten SyncThru weiterhin
+`GXI_INSTALL_OPTION_HDD: 2`; laut originalem Webcode bedeutet `2` **nicht
+installiert**. Dieser Wert wird vom lokalen Helfer nicht verändert. Ob eine
+tatsächlich vorhandene alternative RAM-/Speicherimplementierung für Shared
+Folder, Dokumentbox oder bestimmte gespeicherte Jobs nutzbar ist, ist noch offen.
+Ein eingeblendetes Menü oder eine allgemeine API-Fähigkeitenliste wäre dafür
+kein ausreichender Ende-zu-Ende-Nachweis. Diese Funktionen sind noch nicht
+freigeschaltet.

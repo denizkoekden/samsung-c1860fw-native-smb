@@ -85,9 +85,14 @@ This helper currently supports **guest shares only**; NAS username/password setu
 is not implemented. Do not confuse the printer's SyncThru admin password with a
 NAS login. See the [full setup instructions](docs/ANLEITUNG.md#7-smb-ziel-einrichten).
 
-The original SyncThru SMB editor remains gated separately. This release adds
-a guest favorite through the optional helper; it does not provide a complete
-contact editor. See [other feature limits and address-book design](docs/FUNKTIONEN-UND-ADRESSBUCH.md).
+The direct printer URL still gates the original SyncThru SMB editor separately.
+The current development tree additionally includes **`syncthru_addressbook.py`**,
+a loopback-only view that exposes the **original Samsung SMB/FTP editor** by
+overriding one presentation flag. Editing an existing guest SMB destination was
+verified on the `.04.06` printer. This is a temporary local browser view, **not a
+permanent mainboard-firmware unlock**. It is not included in release `v1.0.0`.
+See the [step-by-step address-book guide](docs/ADRESSBUCH-ANSICHT.md) and
+[other feature limits](docs/FUNKTIONEN-UND-ADRESSBUCH.md).
 
 After setup: **Scan → SMB Scan → Next → select destination → Start**.
 
