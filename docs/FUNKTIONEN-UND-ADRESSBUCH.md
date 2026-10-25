@@ -9,7 +9,7 @@ Backendpfad besitzt.
 | Funktion | Beleg | Status dieses Projekts |
 | --- | --- | --- |
 | SMB-Scan zu externem NAS/Server | Capability- und Modellsperre im Display; Scanengine funktioniert | **Freigeschaltet, Display-zu-NAS-Scan getestet** |
-| FTP-Scan | Im selben Modellblock ausgeblendet | Zusätzliche zwei Instruktionen je Hardwarezweig lokal als Experiment vorbereitet; noch nicht installiert oder Ende zu Ende getestet; nicht Bestandteil des veröffentlichten SMB-Patchprofils |
+| FTP-Scan | Im selben Modellblock ausgeblendet | Experiment für beide Zweige offline geprüft; `.04.06`-Kandidat mit ausdrücklicher Zustimmung installiert, Neustart bestätigt. Originaler FTP-Verbindungs-/Anmelde-/Berechtigungstest erfolgreich und Ziel gespeichert. Displaymenü und echter Scan noch nicht bestätigt; nicht Bestandteil des veröffentlichten SMB-Patchprofils |
 | „Shared Folder“ | Im selben Modellblock gesperrt; Hersteller beschreibt lokalen Gerätespeicher/Massenspeicher | Nicht gepatcht; **kein Synonym für ein externes SMB-Ziel** |
 | PDF-Verschlüsselung beim Scannen | Herstellerübersicht ordnet sie bestimmten Varianten zu | Backend und Freischaltbarkeit ungeprüft |
 | Stempel/Stamp bei Kopierfunktionen | Herstellerübersicht nennt andere Varianten | Freischaltbarkeit ungeprüft |
@@ -64,8 +64,23 @@ Release `v1.0.0` enthält diese Erweiterung noch nicht. Im aktuellen
 Entwicklungsstand gibt es die [lokale originale Adressbuchansicht](ADRESSBUCH-ANSICHT.md):
 die SMB-/FTP-Dialoge wurden am `.04.06`-Gerät geöffnet und ein vorhandener
 Gast-SMB-Kontakt erfolgreich gespeichert. Rücklesen bestätigte nur den beabsichtigten
-Anzeigenamenwechsel; alle Serverparameter blieben identisch. Hinzufügen/Löschen und
-NAS-Passwortanmeldung sind über diese Ansicht noch ungetestet.
+Anzeigenamenwechsel; alle Serverparameter blieben identisch. SMB-Hinzufügen,
+Löschen und SMB-/NAS-Passwortanmeldung sind über diese Ansicht noch ungetestet.
+
+Anschließend wurde auch ein **neues FTP-Ziel mit Benutzer/Passwort** über die
+Originalmaske angelegt und unabhängig zurückgelesen. Der originale Server-Test
+des Druckers meldete Verbindung, Anmeldung und Berechtigungen erfolgreich.
+Das belegt diese FTP-Zielpflege, noch keinen tatsächlich übertragenen Scan und
+keine SMB-Anmeldung mit NAS-Passwort. Löschen wurde nicht getestet.
+Ein Wiederholungstest nach erneutem Öffnen des Kontakts bestand ebenfalls mit
+den gespeicherten FTP-Zugangsdaten, ohne das Passwort erneut einzugeben.
+
+Nach dem zusätzlichen experimentellen FTP-Firmwareupdate war das vorhandene
+Adressbuch beim Rücklesen leer. Der zuvor lokal gesicherte Gast-SMB-Favorit wurde
+daraufhin wiederhergestellt und mit identischen SMB-Parametern verifiziert.
+Die Ursache ist noch ungeklärt; frühere SMB-Updates hatten das Ziel erhalten.
+Vor weiteren Updates deshalb auch die Ziele sichern. Ein Konfigurationsexport
+ist weiterhin kein vollständiges Firmwarebackup.
 
 Diese lokale Ansicht setzt ausschließlich das Anzeigefeld in der Browserantwort.
 Für eine **dauerhafte** Änderung der direkten SyncThru-Druckeradresse müsste das

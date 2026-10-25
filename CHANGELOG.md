@@ -4,9 +4,11 @@
 
 - Experimental loopback-only view of the printer's original SMB/FTP address-book
   dialogs, with writes disabled by default and explicit address-book-only opt-in.
-- Verified opening and editing one existing guest SMB destination on `.04.06`;
-  independent readback found only its intended display-name change. Named NAS
-  authentication, add/delete, and `.02.50` browser behavior remain untested.
+- Verified opening/editing one guest SMB destination and adding a named-login
+  FTP destination through the stock `.04.06` UI, including successful original
+  FTP connection/login/permissions checks and independent address-book readback.
+  SMB named NAS authentication, delete, `.02.50` browser behavior and an actual
+  FTP scan remain untested.
 - Reject guest-helper display names that the stock editor cannot accept,
   including underscores; share/path names remain unaffected.
 - Research notes distinguish PDF encryption, copy stamps, document boxes,

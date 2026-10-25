@@ -3,8 +3,13 @@
 **Entwicklungsstand, 25.10.2026:** Die originale Samsung-Maske wurde auf dem
 `.04.06`-Testgerät geöffnet und zum Speichern eines bestehenden Gast-SMB-Ziels
 benutzt. Unabhängiges Rücklesen bestätigte: nur dessen Anzeigename änderte sich;
-alle SMB-/FTP-Parameter blieben gleich. Hinzufügen, Löschen und die Verbindung
-mit NAS-Benutzerpasswort wurden über diese Ansicht noch nicht Ende zu Ende getestet.
+alle SMB-/FTP-Parameter blieben gleich. Ein neues FTP-Ziel mit Benutzer/Passwort
+wurde anschließend über die Originalmaske angelegt und unabhängig zurückgelesen;
+Samsungs Server-Test bestätigte Verbindung, Anmeldung und Berechtigungen.
+Nach erneutem Öffnen bestand derselbe Test auch mit den gespeicherten
+FTP-Zugangsdaten ohne erneute Passworteingabe.
+Löschen und die Verbindung mit einem **SMB-/NAS-Benutzerpasswort** wurden über
+diese Ansicht noch nicht Ende zu Ende getestet. Ein vollständiger FTP-Scan steht aus.
 Die ältere `.02.50`-Weboberfläche wurde damit nicht getestet.
 
 ## Was das ist
@@ -70,7 +75,9 @@ Adressbucheinträge; die lokale Ansicht ist kein Sandbox-Adressbuch.
 ## Grenzen
 
 - Der Helfer blendet keine FTP-Scan-Schaltfläche am Druckerdisplay ein. Die
-  Display-Firmware dieses Projekts schaltet bislang nur SMB frei.
+  veröffentlichten Display-Patchprofile dieses Projekts schalten bislang nur
+  SMB frei. Der separat lokal erprobte FTP-Firmwarekandidat gehört noch nicht
+  zu diesen Profilen.
 - Andere POST-/Schreibpfade, etwa Firmware, Druckaufträge und Systemeinstellungen,
   sind im Helfer gesperrt. Verwende für solche Aufgaben bei Bedarf die normale
   direkte Drucker-Webadresse.
