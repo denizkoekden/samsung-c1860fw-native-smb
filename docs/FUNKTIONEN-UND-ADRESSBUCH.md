@@ -166,3 +166,21 @@ Folder, Dokumentbox oder bestimmte gespeicherte Jobs nutzbar ist, ist noch offen
 Ein eingeblendetes Menü oder eine allgemeine API-Fähigkeitenliste wäre dafür
 kein ausreichender Ende-zu-Ende-Nachweis. Diese Funktionen sind noch nicht
 freigeschaltet.
+
+Eine zusätzliche **lesende Prüfung des laufenden `.04.06`-Geräts** an der im
+Firmwarecode belegten Seite
+`/sws/app/settings/machine/system/ramdisk/ramdisk.json` ergab:
+
+```text
+GXI_MACHINE_RAM_DISK_OPT: 0
+GSI_MACHINE_RAM_DISK_ENABLE: 0
+GSI_MACHINE_RAM_DISK_SIZE: 0
+GXI_MACHINE_RAM_DISK_MIN: 0
+GXI_MACHINE_RAM_DISK_MAX: 0
+```
+
+Es gibt zwar echte RAM-Disk-Getter und -Setter im Netzwerkmodul, aber dieses
+Gerät meldet derzeit **keine Unterstützung und keinen zulässigen Größenbereich**.
+Ein blindes Setzen von Enable/Size ist daher kein geprüfter Freischaltweg. Das
+Originalskript würde nach dem Speichern außerdem einen Neustart auslösen.
+Es wurden keine RAM-Disk- oder Stempelwerte geschrieben.
